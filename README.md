@@ -167,6 +167,67 @@ module "networking_logging" {
 | module_summary | Summary of enabled features in the module |
 | log_insights_queries | Predefined CloudWatch Logs Insights queries for common use cases |
 
+## Resources
+
+This module creates the following resources:
+
+### CloudWatch Resources
+| Resource | Type | Purpose |
+|----------|------|---------|
+| `aws_cloudwatch_log_group.vpc_flow_logs` | CloudWatch Log Group | Centralized storage for VPC Flow Logs |
+| `aws_cloudwatch_log_group.cloudtrail_logs` | CloudWatch Log Group | Centralized storage for CloudTrail logs |
+| `aws_cloudwatch_log_group.security_group_logs` | CloudWatch Log Group | Centralized storage for Security Group logs |
+| `aws_cloudwatch_log_group.security_group_logs_enhanced` | CloudWatch Log Group | Enhanced Security Group logging with custom configurations |
+| `aws_cloudwatch_metric_alarm.vpc_flow_log_errors` | CloudWatch Alarm | Monitoring for VPC Flow Log errors |
+| `aws_cloudwatch_metric_alarm.cloudtrail_errors` | CloudWatch Alarm | Monitoring for CloudTrail errors |
+| `aws_cloudwatch_metric_alarm.custom` | CloudWatch Alarm | Custom monitoring alarms |
+| `aws_cloudwatch_dashboard.main` | CloudWatch Dashboard | Centralized monitoring dashboard |
+| `aws_cloudwatch_log_metric_filter.filters` | CloudWatch Metric Filter | Advanced log analysis and metrics |
+| `aws_cloudwatch_log_subscription_filter.subscriptions` | CloudWatch Subscription Filter | Log forwarding to external destinations |
+
+### KMS Resources
+| Resource | Type | Purpose |
+|----------|------|---------|
+| `aws_kms_key.logs` | KMS Key | Encryption key for log data at rest |
+| `aws_kms_alias.logs` | KMS Alias | Human-readable alias for the encryption key |
+
+### IAM Resources
+| Resource | Type | Purpose |
+|----------|------|---------|
+| `aws_iam_role.vpc_flow_logs` | IAM Role | Service role for VPC Flow Logs |
+| `aws_iam_role_policy.vpc_flow_logs` | IAM Policy | Permissions for VPC Flow Logs |
+
+### VPC Flow Logs
+| Resource | Type | Purpose |
+|----------|------|---------|
+| `aws_flow_log.vpc` | VPC Flow Log | Network traffic logging for VPCs |
+
+### S3 Resources
+| Resource | Type | Purpose |
+|----------|------|---------|
+| `aws_s3_bucket.vpc_flow_logs` | S3 Bucket | Storage for VPC Flow Logs (when using S3 destination) |
+| `aws_s3_bucket_versioning.vpc_flow_logs` | S3 Bucket Versioning | Version control for VPC Flow Logs |
+| `aws_s3_bucket_server_side_encryption_configuration.vpc_flow_logs` | S3 Encryption | Server-side encryption for VPC Flow Logs |
+| `aws_s3_bucket_public_access_block.vpc_flow_logs` | S3 Public Access Block | Security configuration for VPC Flow Logs bucket |
+| `aws_s3_bucket_lifecycle_configuration.vpc_flow_logs` | S3 Lifecycle | Data lifecycle management for VPC Flow Logs |
+| `aws_s3_bucket.cloudtrail` | S3 Bucket | Storage for CloudTrail logs |
+| `aws_s3_bucket_versioning.cloudtrail` | S3 Bucket Versioning | Version control for CloudTrail logs |
+| `aws_s3_bucket_server_side_encryption_configuration.cloudtrail` | S3 Encryption | Server-side encryption for CloudTrail logs |
+| `aws_s3_bucket_public_access_block.cloudtrail` | S3 Public Access Block | Security configuration for CloudTrail bucket |
+| `aws_s3_bucket_policy.cloudtrail` | S3 Bucket Policy | Access control for CloudTrail bucket |
+| `aws_s3_bucket_lifecycle_configuration.cloudtrail` | S3 Lifecycle | Data lifecycle management for CloudTrail logs |
+
+### CloudTrail Resources
+| Resource | Type | Purpose |
+|----------|------|---------|
+| `aws_cloudtrail.main` | CloudTrail | API call logging and management event tracking |
+
+### Data Sources
+| Resource | Type | Purpose |
+|----------|------|---------|
+| `data.aws_caller_identity.current` | Data Source | Current AWS account information |
+| `data.aws_region.current` | Data Source | Current AWS region information |
+
 ## Examples
 
 ### Basic Example
